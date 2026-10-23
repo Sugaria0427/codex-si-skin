@@ -1,0 +1,12 @@
+{
+  "project": "Codex Dream Skin",
+  "url": "https://github.com/Fei-Away/Codex-Dream-Skin",
+  "version": "1.5.21",
+  "commit": "6fc42df48a6a5365011f55cc349e20c038e56d1d",
+  "license": "MIT",
+  "files": {
+    "LICENSE": "18f8478d0f9efd45307e5f17790194593b116658145c758ced3166398eb05b21",
+    "assets/safe-css-validator.mjs": "98a626655a4167ba0bbbff5eab96e78de7a5a74371e4a4ff6d8ac15211e5b24e",
+    "scripts/image-metadata.mjs": "4ec6d1794a2ba58e3733bcab74723f4e2e061ad8d4e7bbc8664693d4aef09cb4"
+  }
+}

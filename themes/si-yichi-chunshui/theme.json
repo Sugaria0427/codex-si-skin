@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "si-yichi-chunshui",
+  "name": "祀-一池春水",
+  "appearance": "dark",
+  "colors": {
+    "background": "#102823",
+    "panel": "#16352E",
+    "panelAlt": "#20453C",
+    "accent": "#7CDAC1",
+    "accentAlt": "#B5EACF",
+    "secondary": "#8ACBC6",
+    "highlight": "#B8D790",
+    "text": "#EFF9F2",
+    "muted": "#B8D0C5",
+    "line": "#78BDA85C"
+  },
+  "art": {
+    "focusX": 0.45,
+    "focusY": 0.9,
+    "safeArea": "none",
+    "taskMode": "ambient"
+  },
+  "brandSubtitle": "CODEX",
+  "tagline": "",
+  "quote": "",
+  "statusText": "",
+  "projectPrefix": "选择项目 · ",
+  "projectLabel": "选择项目",
+  "image": "",
+  "license": "MIT"
+}

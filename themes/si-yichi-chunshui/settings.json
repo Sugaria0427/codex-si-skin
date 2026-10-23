@@ -1,0 +1,140 @@
+{
+  "schemaVersion": 2,
+  "id": "si-yichi-chunshui",
+  "name": "祀-一池春水",
+  "appearance": "dark",
+  "colors": {
+    "background": "#102823",
+    "panel": "#16352E",
+    "panelAlt": "#20453C",
+    "accent": "#7CDAC1",
+    "accentAlt": "#B5EACF",
+    "secondary": "#8ACBC6",
+    "highlight": "#B8D790",
+    "text": "#EFF9F2",
+    "muted": "#B8D0C5",
+    "line": "#78BDA85C"
+  },
+  "art": {
+    "focusX": 0.45,
+    "focusY": 0.9,
+    "safeArea": "none",
+    "taskMode": "ambient"
+  },
+  "background": {
+    "asset": "",
+    "enabled": true,
+    "opacity": 0.35,
+    "blur": 0,
+    "zoom": 1,
+    "fit": "cover"
+  },
+  "interface": {
+    "opacity": 0.65,
+    "blur": 14,
+    "radius": 16,
+    "border": 0,
+    "shadow": "soft",
+    "components": {
+      "main": {
+        "custom": true,
+        "opacity": 0,
+        "blur": 0,
+        "color": null
+      },
+      "home": {
+        "custom": true,
+        "opacity": 0,
+        "blur": 0,
+        "color": null
+      },
+      "sidebar": {
+        "custom": true,
+        "opacity": 0.65,
+        "blur": 11,
+        "color": null
+      },
+      "navigation": {
+        "custom": true,
+        "opacity": 0,
+        "blur": 0,
+        "color": null
+      },
+      "header": {
+        "custom": true,
+        "opacity": 0,
+        "blur": 0,
+        "color": null
+      },
+      "composer": {
+        "custom": true,
+        "opacity": 0.59,
+        "blur": 14,
+        "color": null
+      },
+      "messages": {
+        "custom": true,
+        "opacity": 0.25,
+        "blur": 2,
+        "color": null
+      },
+      "assistant": {
+        "custom": true,
+        "opacity": 0,
+        "blur": 0,
+        "color": null
+      },
+      "tools": {
+        "custom": false,
+        "opacity": 0.65,
+        "blur": 14,
+        "color": null
+      },
+      "code": {
+        "custom": true,
+        "opacity": 0.5,
+        "blur": 0,
+        "color": null
+      },
+      "panels": {
+        "custom": true,
+        "opacity": 0.59,
+        "blur": 10,
+        "color": null
+      },
+      "settings": {
+        "custom": true,
+        "opacity": 0,
+        "blur": 19,
+        "color": "#20453C"
+      },
+      "dialogs": {
+        "custom": false,
+        "opacity": 0.65,
+        "blur": 14,
+        "color": null
+      },
+      "menus": {
+        "custom": true,
+        "opacity": 0.65,
+        "blur": 14,
+        "color": null
+      }
+    }
+  },
+  "typography": {
+    "enabled": false,
+    "font": "native",
+    "size": 14,
+    "lineHeight": 1.5
+  },
+  "copy": {
+    "brandSubtitle": "CODEX",
+    "tagline": "",
+    "quote": "",
+    "statusText": "",
+    "projectPrefix": "选择项目 · ",
+    "projectLabel": "选择项目"
+  },
+  "customCss": ""
+}

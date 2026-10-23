@@ -1,0 +1,20 @@
+node_modules/
+dist/
+tmp/
+*.log
+*.tmp
+*.user
+.env
+.env.*
+!.env.example
+# Runtime profiles and settings never belong in the repository.
+cdp-profile/
+state.json
+settings-v2.json
+service-v2.json
+launcher-config.json
+launcher-result.json
+launcher-history.log
+themes-v2/
+images-v2/
+backups/

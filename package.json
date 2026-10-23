@@ -1,0 +1,18 @@
+{
+  "name": "codex-si-skin",
+  "version": "0.1.0",
+  "description": "祀 · Codex Skin — Windows Codex appearance controls with the 祀-一池春水 theme",
+  "type": "module",
+  "private": true,
+  "license": "MIT",
+  "repository": { "type": "git", "url": "https://github.com/Sugaria0427/codex-si-skin.git" },
+  "homepage": "https://github.com/Sugaria0427/codex-si-skin#readme",
+  "bugs": { "url": "https://github.com/Sugaria0427/codex-si-skin/issues" },
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "test": "node scripts/test.mjs",
+    "test:ui": "node scripts/test-browser.mjs",
+    "build": "node scripts/build.mjs",
+    "audit:release": "node scripts/audit-release.mjs"
+  }
+}

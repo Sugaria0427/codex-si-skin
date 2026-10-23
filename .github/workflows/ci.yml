@@ -1,0 +1,28 @@
+name: Verify and package
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: npm ci --ignore-scripts
+      - run: npm test
+      - run: npm run test:ui
+      - run: npm run build
+      - run: npm run audit:release
+      - shell: powershell
+        run: ./tests/test-install.ps1
+      - uses: actions/upload-artifact@v4
+        with:
+          name: codex-si-skin
+          path: |
+            dist/*.zip
+            dist/SHA256SUMS.txt
