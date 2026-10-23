@@ -25,6 +25,10 @@ await fs.mkdir(path.join(fresh,'assets'),{recursive:true});await fs.copyFile(pat
 const notice=await fs.readFile(path.join(root,'THIRD_PARTY_NOTICES.md'),'utf8');
 await fs.writeFile(path.join(fresh,'THIRD_PARTY_NOTICES.md'),notice.replaceAll('](vendor/codex-dream-skin/LICENSE)','](payload/engine/LICENSE)').replaceAll('](themes/si-yichi-chunshui/ASSETS.md)','](payload/bundled-themes/si-yichi-chunshui/ASSETS.md)'));
 await fs.writeFile(path.join(freshPayload,'THIRD_PARTY_NOTICES.md'),notice.replaceAll('](vendor/codex-dream-skin/LICENSE)','](engine/LICENSE)').replaceAll('](themes/si-yichi-chunshui/ASSETS.md)','](bundled-themes/si-yichi-chunshui/ASSETS.md)'));
+const readme=await fs.readFile(path.join(root,'README.md'),'utf8'),license=await fs.readFile(path.join(root,'LICENSE'),'utf8');
+await fs.writeFile(path.join(fresh,'README.md'),readme.replaceAll('](themes/si-yichi-chunshui/ASSETS.md)','](payload/bundled-themes/si-yichi-chunshui/ASSETS.md)'));
+await fs.writeFile(path.join(fresh,'LICENSE'),license.replaceAll('themes/si-yichi-chunshui/','payload/bundled-themes/si-yichi-chunshui/'));
+await fs.writeFile(path.join(freshPayload,'LICENSE'),license.replaceAll('themes/si-yichi-chunshui/','bundled-themes/si-yichi-chunshui/'));
 const compiler=path.join(process.env.WINDIR,'System32','WindowsPowerShell','v1.0','powershell.exe');
 await promisify(execFile)(compiler,['-NoLogo','-NoProfile','-NonInteractive','-ExecutionPolicy','Bypass','-File',path.join(root,'scripts','compile-launcher.ps1'),'-SourceFile',path.join(root,'src','codex-skin-launcher.cs'),'-OutputDirectory',path.join(freshPayload,'v2')],{windowsHide:true,timeout:30000});
 const manifest={name:metadata.name,version:metadata.version,platform:'windows-x64',files:{}};
@@ -36,7 +40,7 @@ if(await fs.access(stage).then(()=>true,()=>false))await fs.rename(stage,path.jo
 await fs.rename(fresh,stage);
 const windows={};for(const file of await filesUnder(stage))windows[releaseName+'/'+file]=await fs.readFile(path.join(stage,file));
 const source={};for(const file of await sourceFiles())source[`${metadata.name}-${metadata.version}-source/${file}`]=await fs.readFile(path.join(root,file));
-const themes={};for(const file of ['theme.json','settings.json'])themes[file]=await fs.readFile(path.join(root,'themes','si-yichi-chunshui',file));
+const themes={};for(const file of ['theme.json','settings.json','background.jpg','ASSETS.md'])themes[file]=await fs.readFile(path.join(root,'themes','si-yichi-chunshui',file));
 const products={
   [`${releaseName}.zip`]:packThemeZip(windows),
   [`${metadata.name}-${metadata.version}-source.zip`]:packThemeZip(source),

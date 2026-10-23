@@ -27,6 +27,16 @@
   "statusText": "",
   "projectPrefix": "选择项目 · ",
   "projectLabel": "选择项目",
-  "image": "",
-  "license": "MIT"
+  "image": "background.jpg",
+  "license": "MIT (code and theme parameters only; artwork excluded)",
+  "artwork": {
+    "file": "background.jpg",
+    "title": "一池春水绿于苔",
+    "creator": "待确认",
+    "source": "用户提供的现用背景图片；为当前皮肤使用的优化版本",
+    "rights": "版权归原作者所有，作者与公开分发许可尚未核实；图片不适用本项目 MIT 许可证。",
+    "notice": "如有侵权，请通过 GitHub Issues 联系删除。",
+    "contact": "https://github.com/Sugaria0427/codex-si-skin/issues",
+    "sha256": "4074f7c6585848156d2b5ebf9e81b82794f5f5a992da9c0d769c00e168665c01"
+  }
 }

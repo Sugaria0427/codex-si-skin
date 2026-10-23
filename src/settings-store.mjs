@@ -107,6 +107,13 @@ export class SettingsStore {
       const current=this.validate(request.current||this.state.current);const url=await this.imageData(current.background.asset);const ext=current.background.asset?path.extname(current.background.asset):'.jpg';
       const legacy={schemaVersion:1,id:current.id||randomUUID(),name:current.name,appearance:current.appearance,colors:current.colors,art:current.art,...current.copy,image:url?'background'+ext:''};
       const files={'theme.json':JSON.stringify(legacy,null,2),'settings.json':JSON.stringify(current,null,2)};if(url)files['background'+ext]=Buffer.from(url.split(',')[1],'base64');if(current.customCss)files['theme.css']=current.customCss;
+      if(current.background.asset){
+        const bundled=path.join(this.root,'bundled-themes','si-yichi-chunshui');
+        const shipped=await readJson(path.join(bundled,'theme.json')).catch(e=>{if(e.code==='ENOENT')return null;throw e;});
+        if(shipped?.artwork?.sha256===current.background.asset.split('.')[0]){
+          await plainPath(path.join(bundled,'ASSETS.md'));files['ASSETS.md']=await fs.readFile(path.join(bundled,'ASSETS.md'));legacy.artwork=clone(shipped.artwork);legacy.license=shipped.license;files['theme.json']=JSON.stringify(legacy,null,2);
+        }
+      }
       return {export:{name:current.name.replace(/[<>:"/\\|?*]/g,'_')+'.zip',dataBase64:packThemeZip(files).toString('base64')}};
     }
     if(op==='import'){

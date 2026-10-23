@@ -16,7 +16,9 @@
 - 保存、另存、切换、导入与导出主题；图片共享存储，调整参数时只保存小型 JSON。也支持受限自定义 CSS、字体、边框、圆角和阴影。
 - 点击开始菜单“Codex（祀）”启动；复用已经通过同一入口打开的窗口。后台仅在对应 Codex 会话存在期间运行。
 
-“祀-一池春水”内置当前绿色配色及分组件参数。**公共包暂不附背景图**：原图仍在确认作者及分发许可。安装后可在背景区域选择自己有权使用的图片，完整的主题功能照常可用。配色与模糊效果不依赖某张指定图片。
+“祀-一池春水”内置《一池春水绿于苔》背景图、绿色配色及分组件参数，首次安装即可应用完整皮肤。背景仍可在外观增强中替换。
+
+**图片版权归原作者所有，如有侵权，请通过 [GitHub Issues](https://github.com/Sugaria0427/codex-si-skin/issues) 联系删除。** 图片的作者和公开分发许可尚未核实，图片不适用代码的 MIT 许可证。详细说明随图片附在 [ASSETS.md](themes/si-yichi-chunshui/ASSETS.md) 中。
 
 ## 安装和使用
 
@@ -82,4 +84,4 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File tests\test-install.ps1
 
 ## 许可证与参与
 
-代码与主题参数：MIT。上游署名、版本、所用文件与图片范围见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。提交修改前请阅读 [CONTRIBUTING.md](CONTRIBUTING.md)，安全问题处理见 [SECURITY.md](SECURITY.md)。
+代码与主题参数：MIT；背景图的权利声明见 [ASSETS.md](themes/si-yichi-chunshui/ASSETS.md)。上游署名、版本及所用文件见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。提交修改前请阅读 [CONTRIBUTING.md](CONTRIBUTING.md)，安全问题处理见 [SECURITY.md](SECURITY.md)。

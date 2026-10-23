@@ -17,4 +17,4 @@
 
 Codex、OpenAI 及其标志属于相应权利人。本项目是社区工具。发布包使用项目自己的图标；安装时可从用户本机安装的 Codex 提取图标用于本机快捷方式。Codex 程序、官方图标、Node.js 和用户的账户资料均不随本项目发布。
 
-“祀-一池春水”的配色、透明度及模糊参数按本项目 MIT 许可证提供。公共发行版的背景图状态由 [themes/si-yichi-chunshui/ASSETS.md](themes/si-yichi-chunshui/ASSETS.md) 说明。软件许可证不自动授予用户另行导入图片的分发权。
+“祀-一池春水”的配色、透明度及模糊参数按本项目 MIT 许可证提供。随主题提供的 `background.jpg` 为《一池春水绿于苔》背景图，版权归原作者所有，作者和公开分发许可尚未核实；图片不适用 MIT 许可证。**如有侵权，请通过 [GitHub Issues](https://github.com/Sugaria0427/codex-si-skin/issues) 联系删除。** 完整声明随图片附在 [themes/si-yichi-chunshui/ASSETS.md](themes/si-yichi-chunshui/ASSETS.md) 中。

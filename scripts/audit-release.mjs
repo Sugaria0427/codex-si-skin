@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
+import {unpackThemeZip} from '../src/theme-zip.mjs';
 import {root,metadata,releaseName,sourceFiles,filesUnder} from './release-files.mjs';
 function entries(bytes){
   const end=bytes.length-22;assert.equal(bytes.readUInt32LE(end),0x06054b50);const count=bytes.readUInt16LE(end+10);let p=bytes.readUInt32LE(end+16);const result=new Map();
@@ -18,6 +19,10 @@ const source=entries(await fs.readFile(path.join(dist,sourceName+'.zip')));
 assert.deepEqual([...source.keys()].sort(),(await sourceFiles()).map(n=>sourceName+'/'+n).sort());
 const windows=entries(await fs.readFile(path.join(dist,releaseName+'.zip')));
 assert.deepEqual([...windows.keys()].sort(),(await filesUnder(stage)).map(n=>releaseName+'/'+n).sort());
+const artworkRoot=path.join(root,'themes','si-yichi-chunshui'),artworkTheme=JSON.parse(await fs.readFile(path.join(artworkRoot,'theme.json'),'utf8'));
+const artwork=await fs.readFile(path.join(artworkRoot,'background.jpg')),artworkDigest=createHash('sha256').update(artwork).digest('hex');
+assert.equal(artworkDigest,artworkTheme.artwork.sha256);
+const registeredImages=new Set([sourceName+'/themes/si-yichi-chunshui/background.jpg',releaseName+'/payload/bundled-themes/si-yichi-chunshui/background.jpg']);
 const deniedPath=/(?:^|\/)(?:cdp-profile|node_modules|tmp|dist|\.git|themes-v2|images-v2|backups)(?:\/|$)|(?:^|\/)(?:state|settings-v2|service-v2|launcher-config|launcher-result)\.json$|\.log$|\.env(?:$|\.)/;
 const personalPatterns=[/(?:api[_-]?key|access[_-]?token|refresh[_-]?token)\s*[=:]\s*["'][A-Za-z0-9_-]{20,}/i,/sk-(?:proj-)?[A-Za-z0-9_-]{30,}/];
 for(const archive of [source,windows])for(const [name,data]of archive){
@@ -26,10 +31,18 @@ for(const archive of [source,windows])for(const [name,data]of archive){
     const value=data.toString('utf8');for(const pattern of personalPatterns)assert(!pattern.test(value),'Personal path or credential in '+name);
     for(const match of value.matchAll(/C:[\\/]+Users[\\/]+([^\\/\s"'<>]+)/gi))assert(['fixture','test'].includes(match[1]),'Machine-specific account path in '+name);
   }
-  assert(!/\.(?:jpg|jpeg|webp)$/i.test(name),'Uncleared background image in public release: '+name);
+  if(/\.(?:jpg|jpeg|webp)$/i.test(name)){assert(registeredImages.has(name),'Unregistered background image in public release: '+name);assert.equal(createHash('sha256').update(data).digest('hex'),artworkDigest);}
 }
+for(const file of await sourceFiles())assert(source.get(sourceName+'/'+file).equals(await fs.readFile(path.join(root,file))),'Source archive differs from input: '+file);
+for(const file of await filesUnder(stage))assert(windows.get(releaseName+'/'+file).equals(await fs.readFile(path.join(stage,file))),'Windows archive differs from input: '+file);
+const theme=unpackThemeZip(await fs.readFile(path.join(dist,`si-yichi-chunshui-${metadata.version}.zip`)));
+assert.deepEqual(Object.keys(theme).sort(),['ASSETS.md','background.jpg','settings.json','theme.json']);
+assert.equal(createHash('sha256').update(theme['background.jpg']).digest('hex'),artworkDigest);
+assert(theme['ASSETS.md'].equals(await fs.readFile(path.join(artworkRoot,'ASSETS.md'))));
+assert(theme['ASSETS.md'].toString('utf8').includes('如有侵权，请联系删除'));
+assert.equal(JSON.parse(theme['settings.json']).background.asset,artworkDigest+'.jpg');
 const manifest=JSON.parse(await fs.readFile(path.join(stage,'payload','manifest.json'),'utf8'));
 for(const [file,digest]of Object.entries(manifest.files))assert.equal(createHash('sha256').update(await fs.readFile(path.join(stage,'payload',file))).digest('hex'),digest,file);
 for(const line of (await fs.readFile(path.join(dist,'SHA256SUMS.txt'),'utf8')).trim().split('\n')){const [digest,file]=line.split('  ');assert.equal(createHash('sha256').update(await fs.readFile(path.join(dist,file))).digest('hex'),digest);}
 assert.equal((await fs.readFile(path.join(stage,'payload','v2','CodexSkin.exe'))).subarray(0,2).toString(),'MZ');
-console.log(JSON.stringify({pass:true,sourceFiles:source.size,windowsFiles:windows.size,checks:['explicit package allowlists','no runtime profiles or saved user data','no machine-specific user paths or credentials','no uncleared artwork','payload and archive SHA-256','compiled Windows GUI launcher']}));
+console.log(JSON.stringify({pass:true,sourceFiles:source.size,windowsFiles:windows.size,checks:['explicit package allowlists','no runtime profiles or saved user data','no machine-specific user paths or credentials','only the registered background with its exact hash','artwork and removal notice included in theme ZIP','archive bytes match build inputs','payload and archive SHA-256','compiled Windows GUI launcher']}));
